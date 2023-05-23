@@ -8,6 +8,7 @@ jobs:
     secrets: inherit
     with:
       action: init
+      working_dir: ./terraform-stg
 
   tf_plan:
     needs: [tf_init]
@@ -15,6 +16,7 @@ jobs:
     secrets: inherit
     with:
       action: plan
+      working_dir: ./terraform-stg
 
   tf_apply:
     needs: [tf_plan]
@@ -22,3 +24,4 @@ jobs:
     secrets: inherit
     with:
       action: apply -auto-approve
+      working_dir: ./terraform-stg
