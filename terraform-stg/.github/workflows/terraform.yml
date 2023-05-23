@@ -1,0 +1,24 @@
+name: terraform-stg
+
+on: push
+
+jobs:
+  tf_init:
+    uses: ambikaawari23/terraform_action/.github/workflows/terraform_action.yml@sseerla/stgmain
+    secrets: inherit
+    with:
+      action: init
+
+  tf_plan:
+    needs: [tf_init]
+    uses: ambikaawari23/terraform_action/.github/workflows/terraform_action.yml@sseerla/stgmain
+    secrets: inherit
+    with:
+      action: plan
+
+  tf_apply:
+    needs: [tf_plan]
+    uses: ambikaawari23/terraform_action/.github/workflows/terraform_action.yml@sseerla/stgmain
+    secrets: inherit
+    with:
+      action: apply -auto-approve
